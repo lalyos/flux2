@@ -74,6 +74,9 @@ func NewRepository(name, owner, host, token, authorName, authorEmail string) (*R
 
 // GetURL returns the repository HTTPS address
 func (r *Repository) GetURL() string {
+	if r.Host == "git.lvh.me" || r.Host == "git.default" {
+		return fmt.Sprintf("http://%s/%s/%s", r.Host, r.Owner, r.Name)
+	}
 	return fmt.Sprintf("https://%s/%s/%s", r.Host, r.Owner, r.Name)
 }
 

@@ -44,7 +44,7 @@ the bootstrap command will perform an upgrade if needed.`,
 	Example: `  # Create a GitLab API token and export it as an env var
   export GITLAB_TOKEN=<my-token>
 
-  # Run bootstrap for a private repo using HTTPS token authentication 
+  # Run bootstrap for a private repo using HTTPS token authentication
   flux bootstrap gitlab --owner=<group> --repository=<repo name>
 
   # Run bootstrap for a private repo using SSH authentication
@@ -56,7 +56,7 @@ the bootstrap command will perform an upgrade if needed.`,
   # Run bootstrap for a public repository on a personal account
   flux bootstrap gitlab --owner=<user> --repository=<repo name> --private=false --personal=true
 
-  # Run bootstrap for a private repo hosted on a GitLab server 
+  # Run bootstrap for a private repo hosted on a GitLab server
   flux bootstrap gitlab --owner=<group> --repository=<repo name> --hostname=<domain>
 
   # Run bootstrap for a an existing repository with a branch named main
@@ -122,7 +122,9 @@ func bootstrapGitLabCmdRun(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer os.RemoveAll(tmpDir)
+	//defer os.RemoveAll(tmpDir)
+
+	logger.Successf("HACK tmpDir: %s", tmpDir)
 
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
